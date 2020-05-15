@@ -1,18 +1,20 @@
-/* global width, height, createCanvas, background, line, random, stroke, strokeWeight, pixelDensity, windowWidth, windowHeight, translate, frameRate, color */
+/* global width, height, createCanvas, background, line, random, stroke, strokeWeight, pixelDensity, windowWidth, windowHeight, translate, frameRate, color, noLoop */
 /* eslint no-unused-vars: 0 */
 
 let lines
 let i = 0
-const lineWidth = 70
+let maxi
+const lineWidth = 100
 const maxHeight = 700
 
 function setup () {
   const canvas = createCanvas(windowWidth, windowHeight)
   canvas.style('display', 'block')
   pixelDensity(1)
-  frameRate(10)
+  // frameRate(10)
 
   createLines()
+  maxi = lines.length
 }
 
 function draw () {
@@ -28,7 +30,12 @@ function draw () {
 
   i++
 
-  if (i === lines.length) i = 0
+  if (i === lines.length || i >= maxi) {
+    i = 0
+    maxi--
+  }
+
+  if (maxi === 0) noLoop()
 }
 
 function createLines () {
