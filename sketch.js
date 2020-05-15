@@ -19,14 +19,15 @@ function setup () {
 }
 
 function draw () {
+  // Stop sorting if finished
   if (maxi === 0) noLoop()
+
   background(0)
   translate(lineWidth / 2, 0)
+
   drawLines(i)
 
-  if (lines[i + 1] < lines[i]) {
-    swap(lines, i, i + 1)
-  }
+  if (lines[i + 1] < lines[i]) swap(lines, i, i + 1)
 
   i++
 
@@ -36,23 +37,32 @@ function draw () {
   }
 }
 
+// Swaps two elements in an array
 function swap (arr, from, to) {
   const temp = arr[to]
   arr[to] = arr[from]
   arr[from] = temp
 }
 
+// Creates an array of random values
 function createLines () {
   lines = []
   for (let i = 0; i * (lineWidth + spacing) + lineWidth <= width; i++) lines.push(random(maxHeight))
 }
 
+// Draws the lines
 function drawLines (selected) {
   strokeWeight(lineWidth)
 
   for (let i = 0; i < lines.length; i++) {
-    stroke(selected === i && maxi !== 0 ? color(255, 0, 0) : color(255, 255, 255))
+    // Red if this line is the selected line, otherwise white
+    if (selected === i && maxi !== 0) {
+      stroke(255, 0, 0)
+    } else {
+      stroke(255)
+    }
 
+    // Draw the line
     line(i * (lineWidth + spacing), height, i * (lineWidth + spacing), height - lines[i])
   }
 }
