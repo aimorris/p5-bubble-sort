@@ -1,4 +1,4 @@
-/* global width, height, createCanvas, background, line, random, stroke, strokeWeight, pixelDensity, windowWidth, windowHeight, translate, frameRate */
+/* global width, height, createCanvas, background, line, random, stroke, strokeWeight, pixelDensity, windowWidth, windowHeight, translate, frameRate, color */
 /* eslint no-unused-vars: 0 */
 
 let lines
@@ -18,7 +18,7 @@ function setup () {
 function draw () {
   background(0)
   translate(lineWidth / 2, 0)
-  drawLines()
+  drawLines(i)
 
   if (lines[i + 1] < lines[i]) {
     const temp = lines[i + 1]
@@ -36,11 +36,12 @@ function createLines () {
   for (let i = 0; i < width; i += lineWidth) lines.push(random(maxHeight))
 }
 
-function drawLines () {
-  stroke(255)
+function drawLines (selected) {
   strokeWeight(lineWidth)
 
   for (let i = 0; i < lines.length; i++) {
+    stroke(selected === i ? color(255, 0, 0) : color(255, 255, 255))
+
     line(i * lineWidth, height, i * lineWidth, height - lines[i])
   }
 }
