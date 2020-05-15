@@ -4,7 +4,7 @@
 let lines
 let i = 0
 let maxi
-const lineWidth = 100
+const lineWidth = 50
 const maxHeight = 700
 
 function setup () {
@@ -43,7 +43,7 @@ function swap (arr, from, to) {
 
 function createLines () {
   lines = []
-  for (let i = 0; i < width; i += lineWidth) lines.push(random(maxHeight))
+  for (let i = 0; i * lineWidth + lineWidth <= width; i++) lines.push(random(maxHeight))
 }
 
 function drawLines (selected) {
