@@ -11,21 +11,20 @@ function setup () {
   const canvas = createCanvas(windowWidth, windowHeight)
   canvas.style('display', 'block')
   pixelDensity(1)
-  // frameRate(10)
+  frameRate(10)
 
   createLines()
   maxi = lines.length
 }
 
 function draw () {
+  if (maxi === 0) noLoop()
   background(0)
   translate(lineWidth / 2, 0)
   drawLines(i)
 
   if (lines[i + 1] < lines[i]) {
-    const temp = lines[i + 1]
-    lines[i + 1] = lines[i]
-    lines[i] = temp
+    swap(lines, i, i + 1)
   }
 
   i++
@@ -34,8 +33,12 @@ function draw () {
     i = 0
     maxi--
   }
+}
 
-  if (maxi === 0) noLoop()
+function swap (arr, from, to) {
+  const temp = arr[to]
+  arr[to] = arr[from]
+  arr[from] = temp
 }
 
 function createLines () {
@@ -47,7 +50,7 @@ function drawLines (selected) {
   strokeWeight(lineWidth)
 
   for (let i = 0; i < lines.length; i++) {
-    stroke(selected === i ? color(255, 0, 0) : color(255, 255, 255))
+    stroke(selected === i && maxi !== 0 ? color(255, 0, 0) : color(255, 255, 255))
 
     line(i * lineWidth, height, i * lineWidth, height - lines[i])
   }
