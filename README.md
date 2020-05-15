@@ -1,2 +1,2 @@
-# p5-bubble-sort
-A visualisation of bubble sort in p5.js
+# Bubble Sort
+A visualisation of bubble sort in [p5.js](p5js.org)
