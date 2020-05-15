@@ -5,6 +5,7 @@ let lines
 let i = 0
 let maxi
 const lineWidth = 50
+const spacing = 5
 const maxHeight = 700
 
 function setup () {
@@ -43,7 +44,7 @@ function swap (arr, from, to) {
 
 function createLines () {
   lines = []
-  for (let i = 0; i * lineWidth + lineWidth <= width; i++) lines.push(random(maxHeight))
+  for (let i = 0; i * (lineWidth + spacing) + lineWidth <= width; i++) lines.push(random(maxHeight))
 }
 
 function drawLines (selected) {
@@ -52,6 +53,6 @@ function drawLines (selected) {
   for (let i = 0; i < lines.length; i++) {
     stroke(selected === i && maxi !== 0 ? color(255, 0, 0) : color(255, 255, 255))
 
-    line(i * lineWidth, height, i * lineWidth, height - lines[i])
+    line(i * (lineWidth + spacing), height, i * (lineWidth + spacing), height - lines[i])
   }
 }
